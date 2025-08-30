@@ -1,5 +1,5 @@
 // API Configuration
-const API_BASE_URL = 'https://predesk.onrender.com/';
+const API_BASE_URL = 'https://predesk.onrender.com';
 
 // DOM Elements
 const profileCard = document.getElementById('profileCard');
@@ -439,4 +439,5 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
 
