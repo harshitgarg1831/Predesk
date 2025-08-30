@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - John Doe</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <h1>Portfolio</h1>
+            </div>
+            <div class="nav-links">
+                <a href="#profile" class="nav-link">Profile</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#search" class="nav-link">Search</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <!-- Profile Section -->
+        <section id="profile" class="section">
+            <div class="container">
+                <h2 class="section-title">Profile</h2>
+                <div class="profile-card" id="profileCard">
+                    <div class="profile-loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Loading profile...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <div class="container">
+                <h2 class="section-title">Projects</h2>
+                <div class="projects-filter">
+                    <label for="skillFilter">Filter by skill:</label>
+                    <select id="skillFilter" class="filter-select">
+                        <option value="">All skills</option>
+                    </select>
+                </div>
+                <div class="projects-grid" id="projectsGrid">
+                    <div class="projects-loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Loading projects...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section">
+            <div class="container">
+                <h2 class="section-title">Skills</h2>
+                <div class="skills-grid" id="skillsGrid">
+                    <div class="skills-loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Loading skills...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search Section -->
+        <section id="search" class="section">
+            <div class="container">
+                <h2 class="section-title">Search</h2>
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Search for projects, skills, or experience..." class="search-input">
+                        <button id="searchBtn" class="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    <div class="search-filters">
+                        <select id="searchType" class="filter-select">
+                            <option value="">All types</option>
+                            <option value="profile">Profile</option>
+                            <option value="project">Projects</option>
+                            <option value="skill">Skills</option>
+                            <option value="work">Work Experience</option>
+                        </select>
+                        <select id="searchCategory" class="filter-select">
+                            <option value="">All categories</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="search-results" id="searchResults">
+                    <div class="search-placeholder">
+                        <i class="fas fa-search"></i>
+                        <p>Enter a search term to find projects, skills, or experience</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Project Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="projectModalContent"></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Portfolio. Built with ❤️ using Node.js, MySQL, and vanilla HTML/CSS.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

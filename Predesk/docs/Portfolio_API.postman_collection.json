@@ -1,0 +1,581 @@
+{
+	"info": {
+		"_postman_id": "portfolio-api-collection",
+		"name": "Portfolio API",
+		"description": "Complete API collection for the Portfolio application. Test all endpoints including profile management, projects, skills, and search functionality.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "portfolio-api"
+	},
+	"item": [
+		{
+			"name": "Health Check",
+			"item": [
+				{
+					"name": "Get Health Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/health",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"health"
+							]
+						},
+						"description": "Check if the API is running and healthy"
+					},
+					"response": []
+				}
+			],
+			"description": "Health check endpoints for monitoring API status"
+		},
+		{
+			"name": "Profile Management",
+			"item": [
+				{
+					"name": "Get Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"profile"
+							]
+						},
+						"description": "Retrieve the current user profile with skills and work experience"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Profile",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Jane Doe\",\n  \"email\": \"jane.doe@example.com\",\n  \"education\": \"Master of Science in Computer Science, University of Technology, 2022\",\n  \"github_link\": \"https://github.com/janedoe\",\n  \"linkedin_link\": \"https://linkedin.com/in/janedoe\",\n  \"portfolio_link\": \"https://janedoe.dev\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"profile"
+							]
+						},
+						"description": "Create a new user profile"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Jane Doe Updated\",\n  \"email\": \"jane.doe@example.com\",\n  \"education\": \"Master of Science in Computer Science, University of Technology, 2022\",\n  \"github_link\": \"https://github.com/janedoe\",\n  \"linkedin_link\": \"https://linkedin.com/in/janedoe\",\n  \"portfolio_link\": \"https://janedoe.dev\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"profile"
+							]
+						},
+						"description": "Update existing user profile"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Profile Skills",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"skill_ids\": [1, 2, 3, 4]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/profile/skills",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"profile",
+								"skills"
+							]
+						},
+						"description": "Update the skills associated with the user profile"
+					},
+					"response": []
+				}
+			],
+			"description": "Profile management endpoints for user information"
+		},
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "Get All Projects",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/projects",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"projects"
+							]
+						},
+						"description": "Retrieve all projects with their associated skills"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Projects by Skill",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/projects?skill=react",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"projects"
+							],
+							"query": [
+								{
+									"key": "skill",
+									"value": "react"
+								}
+							]
+						},
+						"description": "Filter projects by a specific skill"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Project by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/projects/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"1"
+							]
+						},
+						"description": "Retrieve a specific project by its ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Project",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"New Project\",\n  \"description\": \"A new project description\",\n  \"github_link\": \"https://github.com/user/new-project\",\n  \"live_link\": \"https://new-project.demo.com\",\n  \"image_url\": \"https://via.placeholder.com/400x300\",\n  \"skill_ids\": [1, 2, 3]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/projects",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"projects"
+							]
+						},
+						"description": "Create a new project"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Project",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Updated Project Title\",\n  \"description\": \"Updated project description\",\n  \"github_link\": \"https://github.com/user/updated-project\",\n  \"live_link\": \"https://updated-project.demo.com\",\n  \"image_url\": \"https://via.placeholder.com/400x300\",\n  \"skill_ids\": [1, 2, 4]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/projects/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"1"
+							]
+						},
+						"description": "Update an existing project"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Project",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/projects/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"1"
+							]
+						},
+						"description": "Delete a project by ID"
+					},
+					"response": []
+				}
+			],
+			"description": "Project management endpoints for portfolio projects"
+		},
+		{
+			"name": "Skills",
+			"item": [
+				{
+					"name": "Get All Skills",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/skills",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"skills"
+							]
+						},
+						"description": "Retrieve all skills with project counts"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Top Skills",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/skills/top?limit=5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"skills",
+								"top"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						},
+						"description": "Get top skills by project count"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Skill by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/skills/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"skills",
+								"1"
+							]
+						},
+						"description": "Retrieve a specific skill by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Skill",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Vue.js\",\n  \"proficiency_level\": \"intermediate\",\n  \"category\": \"Frontend\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/skills",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"skills"
+							]
+						},
+						"description": "Create a new skill"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Skill",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Vue.js Updated\",\n  \"proficiency_level\": \"advanced\",\n  \"category\": \"Frontend\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/skills/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"skills",
+								"1"
+							]
+						},
+						"description": "Update an existing skill"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Skill",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/skills/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"skills",
+								"1"
+							]
+						},
+						"description": "Delete a skill by ID"
+					},
+					"response": []
+				}
+			],
+			"description": "Skill management endpoints for technical competencies"
+		},
+		{
+			"name": "Search",
+			"item": [
+				{
+					"name": "Global Search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/search?q=javascript",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "javascript"
+								}
+							]
+						},
+						"description": "Search across all entities (profiles, projects, skills, work experience)"
+					},
+					"response": []
+				},
+				{
+					"name": "Advanced Search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/search/advanced?q=react&type=project&category=Frontend",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"search",
+								"advanced"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "react"
+								},
+								{
+									"key": "type",
+									"value": "project"
+								},
+								{
+									"key": "category",
+									"value": "Frontend"
+								}
+							]
+						},
+						"description": "Advanced search with type and category filtering"
+					},
+					"response": []
+				}
+			],
+			"description": "Search functionality across all portfolio entities"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Set default headers if needed",
+					"if (!pm.request.headers.has('Content-Type')) {",
+					"    pm.request.headers.add({",
+					"        key: 'Content-Type',",
+					"        value: 'application/json'",
+					"    });",
+					"}",
+					"",
+					"// Log request details",
+					"console.log('Making request to:', pm.request.url.toString());",
+					"console.log('Method:', pm.request.method);"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Basic response validation",
+					"pm.test('Status code is 200 or 201', function () {",
+					"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+					"});",
+					"",
+					"pm.test('Response has required fields', function () {",
+					"    const responseJson = pm.response.json();",
+					"    ",
+					"    if (pm.response.code === 200 || pm.response.code === 201) {",
+					"        pm.expect(responseJson).to.have.property('id');",
+					"    }",
+					"});",
+					"",
+					"// Log response details",
+					"console.log('Response status:', pm.response.status);",
+					"console.log('Response time:', pm.response.responseTime, 'ms');",
+					"",
+					"// Store response data for other requests if needed",
+					"if (pm.response.json().id) {",
+					"    pm.environment.set('last_created_id', pm.response.json().id);",
+					"}"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000",
+			"type": "string",
+			"description": "Base URL for the Portfolio API"
+		},
+		{
+			"key": "profile_id",
+			"value": "1",
+			"type": "string",
+			"description": "ID of the user profile"
+		},
+		{
+			"key": "project_id",
+			"value": "1",
+			"type": "string",
+			"description": "ID of a sample project"
+		},
+		{
+			"key": "skill_id",
+			"value": "1",
+			"type": "string",
+			"description": "ID of a sample skill"
+		}
+	]
+}
