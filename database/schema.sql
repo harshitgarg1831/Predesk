@@ -1,11 +1,6 @@
--- Portfolio Database Schema
--- This file contains the complete database structure for the portfolio application
-
--- Create database
 CREATE DATABASE IF NOT EXISTS portfolio_db;
 USE portfolio_db;
 
--- Profiles table - stores user profile information
 CREATE TABLE IF NOT EXISTS profiles (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
@@ -18,7 +13,6 @@ CREATE TABLE IF NOT EXISTS profiles (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
--- Skills table - stores technical skills and competencies
 CREATE TABLE IF NOT EXISTS skills (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) UNIQUE NOT NULL,
@@ -27,7 +21,6 @@ CREATE TABLE IF NOT EXISTS skills (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Projects table - stores project information
 CREATE TABLE IF NOT EXISTS projects (
     id INT PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(255) NOT NULL,
@@ -39,7 +32,6 @@ CREATE TABLE IF NOT EXISTS projects (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
--- Work experience table - stores professional work history
 CREATE TABLE IF NOT EXISTS work_experience (
     id INT PRIMARY KEY AUTO_INCREMENT,
     company VARCHAR(255) NOT NULL,
@@ -51,7 +43,6 @@ CREATE TABLE IF NOT EXISTS work_experience (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Junction table for projects and skills (many-to-many relationship)
 CREATE TABLE IF NOT EXISTS project_skills (
     project_id INT,
     skill_id INT,
@@ -60,7 +51,6 @@ CREATE TABLE IF NOT EXISTS project_skills (
     FOREIGN KEY (skill_id) REFERENCES skills(id) ON DELETE CASCADE
 );
 
--- Junction table for profiles and skills (many-to-many relationship)
 CREATE TABLE IF NOT EXISTS profile_skills (
     profile_id INT,
     skill_id INT,
@@ -69,12 +59,10 @@ CREATE TABLE IF NOT EXISTS profile_skills (
     FOREIGN KEY (skill_id) REFERENCES skills(id) ON DELETE CASCADE
 );
 
--- Sample data for profiles
 INSERT INTO profiles (name, email, education, github_link, linkedin_link, portfolio_link) VALUES
 ('Harshit Garg', 'harshitgarg1830@gmail.com', 'B.Tech in Computer Science and Engineering from IIIT Nagpur (2022 - 2026)', 
  'https://github.com/The-harshitg', 'https://www.linkedin.com/in/harshit-garg-649136259/', 'N/A');
 
--- Sample data for skills
 INSERT INTO skills (name, proficiency_level, category) VALUES
 ('C++', 'intermediate', 'Programming'),
 ('SQL', 'intermediate', 'Programming'),
@@ -88,7 +76,6 @@ INSERT INTO skills (name, proficiency_level, category) VALUES
 ('bcrypt', 'intermediate', 'Security'),
 ('HTML', 'advanced', 'Frontend');
 
--- Sample data for projects
 INSERT INTO projects (title, description, github_link, live_link, image_url) VALUES
 ('Airline Booking System', 'A microservices-based airline booking backend with 4+ decoupled services and an API Gateway, with JWT authentication, RabbitMQ integration, and MySQL for database management.',
  'https://github.com/HarshitGarg/airline-booking', 'N/A', 'https://via.placeholder.com/400x300/4F46E5/FFFFFF?text=Airline+Booking+System'),
@@ -97,22 +84,18 @@ INSERT INTO projects (title, description, github_link, live_link, image_url) VAL
 ('Hotel Booking System', 'An object-oriented hotel booking application built in C++, utilizing OOP principles like inheritance and polymorphism for room reservations and billing.',
  'https://github.com/HarshitGarg/hotel-booking-system', 'N/A', 'https://via.placeholder.com/400x300/F59E0B/FFFFFF?text=Hotel+Booking+System');
 
--- Sample data for work experience
 INSERT INTO work_experience (company, position, description, start_date, end_date, current_job) VALUES
 ('Tech Solutions Inc.', 'Senior Full Stack Developer', 'Led development of multiple web applications using React, Node.js, and MySQL. Mentored junior developers and implemented CI/CD pipelines.', '2022-01-01', NULL, TRUE),
 ('StartupXYZ', 'Frontend Developer', 'Developed responsive user interfaces and implemented modern web technologies. Collaborated with design and backend teams.', '2020-06-01', '2021-12-31', FALSE);
 
--- Link profile to skills
 INSERT INTO profile_skills (profile_id, skill_id) VALUES
 (1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (1, 8), (1, 9), (1, 10), (1, 11);
 
--- Link projects to skills (randomly assign 2-4 skills per project)
 INSERT INTO project_skills (project_id, skill_id) VALUES
-(1, 1), (1, 2), (1, 4), (1, 5), (1, 6), (1, 7), (1, 8), (1, 9), -- Airline Booking: C++, SQL, Node.js, Express.js, MySQL, Git, RabbitMQ, JWT
-(2, 3), (2, 4), (2, 5), (2, 6), (2, 7), -- CollegeHub: JavaScript, Node.js, Express.js, MySQL, Git
-(3, 1), (3, 2), (3, 10), (3, 11); -- Hotel Booking System: C++, SQL, bcrypt, HTML
+(1, 1), (1, 2), (1, 4), (1, 5), (1, 6), (1, 7), (1, 8), (1, 9),
+(2, 3), (2, 4), (2, 5), (2, 6), (2, 7),
+(3, 1), (3, 2), (3, 10), (3, 11);
 
--- Create indexes for better performance
 CREATE INDEX idx_projects_created_at ON projects(created_at);
 CREATE INDEX idx_skills_category ON skills(category);
 CREATE INDEX idx_skills_proficiency ON skills(proficiency_level);
@@ -120,7 +103,6 @@ CREATE INDEX idx_work_experience_dates ON work_experience(start_date, end_date);
 CREATE INDEX idx_profile_skills_profile ON profile_skills(profile_id);
 CREATE INDEX idx_project_skills_project ON project_skills(project_id);
 
--- Create views for common queries
 CREATE VIEW project_skills_view AS
 SELECT p.id, p.title, p.description, GROUP_CONCAT(s.name) as skills
 FROM projects p
@@ -135,7 +117,6 @@ LEFT JOIN profile_skills ps ON pr.id = ps.profile_id
 LEFT JOIN skills s ON ps.skill_id = s.id
 GROUP BY pr.id;
 
--- Create stored procedure for searching
 DELIMITER //
 CREATE PROCEDURE SearchPortfolio(IN search_query VARCHAR(255))
 BEGIN
@@ -167,3 +148,4 @@ BEGIN
     ORDER BY created_at DESC;
 END //
 DELIMITER ;
+
