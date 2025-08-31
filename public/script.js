@@ -260,8 +260,11 @@ function renderSkills(skills) {
 // Search Functionality
 async function performSearch() {
     const query = searchInput.value.trim();
-    const type = searchType.value;
-    const category = searchCategory.value;
+    // const type = searchType.value;
+    // const category = searchCategory.value;
+
+    const type = 'All types';
+    const category = 'All categories';
     
     if (!query) {
         showSearchPlaceholder();
@@ -437,6 +440,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
 
 
 
