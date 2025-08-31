@@ -169,8 +169,6 @@ function renderProjects(projects) {
     
     const projectsHtml = projects.map(project => `
         <div class="project-card" onclick="openProjectModal(${project.id})">
-            <img src="${project.image_url || 'https://via.placeholder.com/400x300/667eea/FFFFFF?text=Project'}" 
-                 alt="${project.title}" class="project-image">
             <div class="project-content">
                 <h3 class="project-title">${project.title}</h3>
                 <p class="project-description">${project.description}</p>
@@ -439,6 +437,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
 
 
 
